@@ -37,3 +37,28 @@ This project presents a hybrid framework for automated security management in So
 - SDN Controllers: Ryu.
 - Sumulation Environment: Mininet.
 
+### Installation and Steps to Test System
+#### Prerequisites
+1. Install Python 3.8+ and pip.
+2. Install Mininet and ryu.
+#### Steps
+1. Start controller and generate flowtable at each terminal.
+```bash
+# Start Controller
+sudo python3 packet_in.py
+# Start Flowtable generator
+sudo python3 flowtable.py
+```
+2. Start Mininet.
+```bash
+sudo mn --custom largetopo.py --topo mylargetopo --mac --controller=remote,ip=127.0.0.1,port=6653 --switch=ovsk,protocols=OpenFlow13
+```
+3. Generate normal traffic by using _traffic_instruction.txt_ or some instructions you want.
+4. Start Packet Inspector.
+```bash
+sudo ./inspect_flow.sh
+```
+5. Test system by give network attack instruction among _attack_instruction.txt_.
+
+
+
