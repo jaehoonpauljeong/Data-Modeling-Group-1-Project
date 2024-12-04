@@ -1,0 +1,48 @@
+[ALERT] Detected brute force attack on nw_dst=10.0.0.2, tp_dst=22, entry_count=200, entry_percentage=86.21%
+[ALERT] Blocking traffic to nw_dst=10.0.0.2, tp_dst=22
+[INFO] Command executed successfully: sudo ovs-ofctl -O OpenFlow13 del-flows s1 "tcp,nw_dst=10.0.0.2,tp_dst=22"
+[INFO] Command executed successfully: sudo ovs-ofctl -O OpenFlow13 add-flow s1 "priority=100,tcp,nw_dst=10.0.0.2,tp_dst=22,actions=drop"
+[INFO] Command executed successfully: sudo ovs-ofctl -O OpenFlow13 del-flows s2 "tcp,nw_dst=10.0.0.2,tp_dst=22"
+[INFO] Command executed successfully: sudo ovs-ofctl -O OpenFlow13 add-flow s2 "priority=100,tcp,nw_dst=10.0.0.2,tp_dst=22,actions=drop"
+[INFO] Command executed successfully: sudo ovs-ofctl -O OpenFlow13 del-flows s3 "tcp,nw_dst=10.0.0.2,tp_dst=22"
+[INFO] Command executed successfully: sudo ovs-ofctl -O OpenFlow13 add-flow s3 "priority=100,tcp,nw_dst=10.0.0.2,tp_dst=22,actions=drop"
+[INFO] Command executed successfully: sudo ovs-ofctl -O OpenFlow13 del-flows s4 "tcp,nw_dst=10.0.0.2,tp_dst=22"
+[INFO] Command executed successfully: sudo ovs-ofctl -O OpenFlow13 add-flow s4 "priority=100,tcp,nw_dst=10.0.0.2,tp_dst=22,actions=drop"
+[INFO] Command executed successfully: sudo ovs-ofctl -O OpenFlow13 del-flows s5 "tcp,nw_dst=10.0.0.2,tp_dst=22"
+[INFO] Command executed successfully: sudo ovs-ofctl -O OpenFlow13 add-flow s5 "priority=100,tcp,nw_dst=10.0.0.2,tp_dst=22,actions=drop"
+[INFO] Command executed successfully: sudo ovs-ofctl -O OpenFlow13 del-flows s6 "tcp,nw_dst=10.0.0.2,tp_dst=22"
+[INFO] Command executed successfully: sudo ovs-ofctl -O OpenFlow13 add-flow s6 "priority=100,tcp,nw_dst=10.0.0.2,tp_dst=22,actions=drop"
+[INFO] Generated Mitigation XML for tp_dst=22:
+
+<rpc xmlns="urn:ietf:params:xml:ns:netconf:base:1.0" message-id="1">
+  <edit-config>
+    <target>
+      <candidate/>
+    </target>
+    <config>
+      <brute-force-mitigation xmlns="urn:example:brute-force-mitigation">
+        <mitigation-policy>
+          <policy-id>ssh-policy-001</policy-id>
+          <policy-name>SSH-MITIGATION</policy-name>
+          <target>192.168.192.130/24</target>
+          <authentication-failure-threshold>10</authentication-failure-threshold>
+          <observation-window>60</observation-window>
+          <mitigation-actions>
+            <block-src-ip>
+              <blocked-src-ip>
+                <ip>192.168.1.100</ip>
+                <block-duration>30</block-duration>
+              </blocked-src-ip>
+            </block-src-ip>
+          </mitigation-actions>
+          <detection-parameters>
+            <protocol-type>ssh</protocol-type>
+            <failed-login-threshold>10</failed-login-threshold>
+            <connection-rate-threshold>5</connection-rate-threshold>
+          </detection-parameters>
+        </mitigation-policy>
+      </brute-force-mitigation>
+    </config>
+  </edit-config>
+</rpc>
+

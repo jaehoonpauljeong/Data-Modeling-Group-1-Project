@@ -1,0 +1,49 @@
+[ALERT] Detected port scan attack from src_ip=10.0.0.5, flow_count=320, total_flows=344
+[ALERT] Blocking traffic from src_ip=10.0.0.5
+[INFO] Command executed successfully: sudo ovs-ofctl -O OpenFlow13 del-flows s1 "ip,nw_src=10.0.0.5"
+[INFO] Command executed successfully: sudo ovs-ofctl -O OpenFlow13 add-flow s1 "priority=100,ip,nw_src=10.0.0.5,actions=drop"
+[INFO] Command executed successfully: sudo ovs-ofctl -O OpenFlow13 del-flows s2 "ip,nw_src=10.0.0.5"
+[INFO] Command executed successfully: sudo ovs-ofctl -O OpenFlow13 add-flow s2 "priority=100,ip,nw_src=10.0.0.5,actions=drop"
+[INFO] Command executed successfully: sudo ovs-ofctl -O OpenFlow13 del-flows s3 "ip,nw_src=10.0.0.5"
+[INFO] Command executed successfully: sudo ovs-ofctl -O OpenFlow13 add-flow s3 "priority=100,ip,nw_src=10.0.0.5,actions=drop"
+[INFO] Command executed successfully: sudo ovs-ofctl -O OpenFlow13 del-flows s4 "ip,nw_src=10.0.0.5"
+[INFO] Command executed successfully: sudo ovs-ofctl -O OpenFlow13 add-flow s4 "priority=100,ip,nw_src=10.0.0.5,actions=drop"
+[INFO] Command executed successfully: sudo ovs-ofctl -O OpenFlow13 del-flows s5 "ip,nw_src=10.0.0.5"
+[INFO] Command executed successfully: sudo ovs-ofctl -O OpenFlow13 add-flow s5 "priority=100,ip,nw_src=10.0.0.5,actions=drop"
+[INFO] Command executed successfully: sudo ovs-ofctl -O OpenFlow13 del-flows s6 "ip,nw_src=10.0.0.5"
+[INFO] Command executed successfully: sudo ovs-ofctl -O OpenFlow13 add-flow s6 "priority=100,ip,nw_src=10.0.0.5,actions=drop"
+[INFO] Generated Mitigation XML for src_ip=10.0.0.5: 
+<rpc xmlns="urn:ietf:params:xml:ns:netconf:base:1.0" message-id="1">
+  <edit-config>
+    <target>
+      <candidate/>
+    </target>
+    <config>
+      <port-scan-mitigation xmlns="urn:example:port-scan-mitigation">
+        <mitigation-policy>
+          <policy-id>tcp-scan-policy-001</policy-id>
+          <policy-name>TCP-SCAN-MITIGATION</policy-name>
+          <target>192.168.192.130/24</target>
+          <scan-detection-threshold>30</scan-detection-threshold>
+          <observation-window>60</observation-window>
+          <mitigation-actions>
+            <block-src-ip>
+              <blocked-src-ip>
+                <ip>192.168.1.100</ip>
+                <block-duration>300</block-duration>
+              </blocked-src-ip>
+            </block-src-ip>
+          </mitigation-actions>
+          <detection-parameters>
+            <scan-type>tcp-syn-scan</scan-type>
+            <short-duration-threshold>5</short-duration-threshold>
+            <connection-rate-threshold>100</connection-rate-threshold>
+            <alert-threshold>50</alert-threshold>
+            <geo-location-block>false</geo-location-block>
+          </detection-parameters>
+        </mitigation-policy>
+      </port-scan-mitigation>
+    </config>
+  </edit-config>
+</rpc>
+

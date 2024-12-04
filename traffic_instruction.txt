@@ -1,0 +1,5 @@
+h1 ping h7 -i 3 &
+h3 hping3 -S -A -p 80 h5 -i 3 &
+h8 hping3 --udp -p 53 h6 -i 3 &
+h4 hping3 -1 h2 -i 3 &
+ 

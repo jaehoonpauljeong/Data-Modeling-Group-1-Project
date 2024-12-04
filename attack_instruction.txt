@@ -1,0 +1,8 @@
+# DOS ATTACK
+h1 hping3 -S -p 80 -s 12345 -k -i u1000 h5
+
+# BRUTE FORCE ATTACK
+h8 hping3 -S -p 22 --rand-source -c 50 -i u20000 10.0.0.2
+
+# NETWORK SCAN
+h5 nmap -p 20-100 10.0.0.2

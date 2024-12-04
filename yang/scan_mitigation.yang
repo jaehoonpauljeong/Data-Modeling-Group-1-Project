@@ -1,0 +1,169 @@
+module port-scan-mitigation {
+  namespace "urn:example:port-scan-mitigation";
+  prefix psmit;
+
+  import ietf-inet-types {
+    prefix inet;
+  }
+
+  organization "Example Organization";
+  contact "support@example.com";
+
+  description
+    "Module defining a Port Scan mitigation model.";
+
+  revision "2024-11-28" {
+    description "Initial revision.";
+  }
+
+  container port-scan-mitigation {
+    description
+      "Top-level container for Port Scan mitigation.";
+
+    list mitigation-policy {
+      key "policy-id";
+      description
+        "List of mitigation policies for managing Port Scan attacks.";
+
+      leaf policy-id {
+        type string;
+        description "Unique identifier for the mitigation policy.";
+      }
+
+      leaf policy-name {
+        type string;
+        description "Name of the mitigation policy.";
+      }
+
+      leaf target {
+        type inet:ip-prefix;
+        description "The IP prefix or network segment to which this policy applies.";
+      }
+
+      leaf scan-detection-threshold {
+        type uint32;
+        units "percentage";
+        description
+          "The percentage of short-duration flows from a specific source IP that indicates a potential Port Scan.";
+      }
+
+      leaf observation-window {
+        type uint32;
+        units "seconds";
+        description
+          "The time window in seconds within which scan attempts are counted.";
+      }
+
+      container mitigation-actions {
+        description
+          "Actions to be taken when a Port Scan condition is detected.";
+
+        choice action-type {
+          description "Type of mitigation action to apply.";
+
+          case block-src-ip {
+            description "Block traffic from specific source IP addresses.";
+            list blocked-src-ip {
+              key "ip";
+              leaf ip {
+                type inet:ip-address;
+                description "Source IP address to block.";
+              }
+              leaf block-duration {
+                type uint32;
+                units "seconds";
+                description "Duration for which the IP address will be blocked.";
+              }
+            }
+          }
+
+          case rate-limit {
+            description "Rate-limit the traffic originating from suspected sources.";
+            leaf rate-limit-value {
+              type uint32;
+              units "packets-per-second";
+              description "Maximum allowed packet rate.";
+            }
+            leaf duration {
+              type uint32;
+              units "seconds";
+              description "Duration for the rate limit to be applied.";
+            }
+          }
+
+          case alert {
+            description "Send an alert to the administrator.";
+            leaf alert-message {
+              type string;
+              description "Custom alert message to be sent.";
+            }
+            leaf alert-destination {
+              type inet:ip-address;
+              description "The IP address to which the alert will be sent.";
+            }
+          }
+
+          case drop-traffic {
+            description "Drop traffic originating from specific sources.";
+            leaf drop-duration {
+              type uint32;
+              units "seconds";
+              description "Duration for which traffic will be dropped.";
+            }
+          }
+        }
+      }
+
+      container detection-parameters {
+        description
+          "Parameters for detecting and identifying Port Scan attacks.";
+
+        leaf scan-type {
+          type enumeration {
+            enum "tcp-syn-scan" {
+              description "TCP SYN Scan.";
+            }
+            enum "tcp-connect-scan" {
+              description "TCP Connect Scan.";
+            }
+            enum "udp-scan" {
+              description "UDP Scan.";
+            }
+            enum "fin-scan" {
+              description "FIN Scan.";
+            }
+            enum "xmas-scan" {
+              description "XMAS Scan.";
+            }
+          }
+          description "The type of port scan detection being used.";
+        }
+
+        leaf short-duration-threshold {
+          type uint32;
+          units "seconds";
+          description "Maximum duration of a flow considered as part of a port scan.";
+        }
+
+        leaf connection-rate-threshold {
+          type uint32;
+          units "connections-per-second";
+          description "Maximum allowed connection attempts per second.";
+        }
+
+        leaf alert-threshold {
+          type uint32;
+          description "The number of scan attempts within the observation window that triggers an alert.";
+        }
+
+        leaf geo-location-block {
+          type boolean;
+          default "false";
+          description
+            "Enable or disable blocking traffic based on geographic location.";
+        }
+      }
+    }
+  }
+}
+

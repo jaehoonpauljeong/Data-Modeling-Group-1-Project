@@ -1,0 +1,138 @@
+module ddos-mitigation {
+  namespace "urn:example:ddos-mitigation";
+  prefix ddos;
+
+  import ietf-inet-types {
+    prefix inet;
+  }
+
+  organization "Example Organization";
+  contact "support@example.com";
+
+  description
+    "Module defining a DDoS mitigation model.";
+
+  revision "2024-11-28" {
+    description "Initial revision.";
+  }
+
+  container ddos-mitigation {
+    description
+      "Top-level container for DDoS mitigation.";
+
+    list mitigation-policy {
+      key "policy-id";
+      description
+        "List of DDoS mitigation policies applied to various network segments or nodes.";
+
+      leaf policy-id {
+        type string;
+        description "Unique identifier for the mitigation policy.";
+      }
+
+      leaf policy-name {
+        type string;
+        description "Name of the mitigation policy.";
+      }
+
+      leaf target {
+        type inet:ip-prefix;
+        description "The IP prefix or network segment to which this policy applies.";
+      }
+
+      leaf traffic-threshold {
+        type uint32;
+        units "packets-per-second";
+        description "The packet rate threshold beyond which mitigation will be triggered.";
+      }
+
+      container mitigation-actions {
+        description
+          "The actions that will be taken when the policy conditions are met.";
+
+        choice action-type {
+          description "Type of mitigation action to apply.";
+
+          case rate-limit {
+            leaf rate-limit-value {
+              type uint32;
+              units "packets-per-second";
+              description "Maximum rate allowed for the traffic.";
+            }
+            leaf duration {
+              type uint32;
+              units "seconds";
+              description "Duration for the rate limit to be applied.";
+            }
+          }
+
+          case drop-traffic {
+            description "Drop traffic originating from specific sources.";
+            leaf drop-duration {
+              type uint32;
+              units "seconds";
+              description "Duration for which traffic will be dropped.";
+            }
+          }
+
+          case block-src-mac {
+            description "Block traffic from specific MAC addresses.";
+            list blocked-src-mac {
+              key "mac";
+              leaf mac {
+                type string;
+                description "Source MAC address to block.";
+              }
+              leaf block-duration {
+                type uint32;
+                units "seconds";
+                description "Duration for which the MAC address will be blocked.";
+              }
+            }
+          }
+
+          case redirect-traffic {
+            description "Redirect suspected DDoS traffic to a scrubbing center.";
+            leaf scrubbing-center {
+              type inet:ip-address;
+              description "The IP address of the scrubbing center.";
+            }
+          }
+        }
+      }
+
+      container detection-parameters {
+        description
+          "Parameters that determine the detection and identification of DDoS events.";
+
+        leaf protocol-type {
+          type enumeration {
+            enum "tcp" {
+              description "TCP traffic.";
+            }
+            enum "udp" {
+              description "UDP traffic.";
+            }
+            enum "icmp" {
+              description "ICMP traffic.";
+            }
+          }
+          description "The protocol to which the detection applies.";
+        }
+
+        leaf syn-flag-threshold {
+          type uint32;
+          description
+            "Number of SYN packets per second beyond which a flow is considered a potential SYN flood.";
+        }
+
+        leaf connection-rate-limit {
+          type uint32;
+          units "connections-per-second";
+          description "Maximum allowed connection attempts per second.";
+        }
+      }
+    }
+  }
+}
+

@@ -1,0 +1,89 @@
+[INFO] Average n_packets per duration: 0.22
+[INFO] Average n_bytes per duration: 11.73
+[INFO] Average n_packets per duration: 0.22
+[INFO] Average n_bytes per duration: 11.73
+[INFO] Average n_packets per duration: 0.22
+[INFO] Average n_bytes per duration: 11.79
+[INFO] Average n_packets per duration: 0.22
+[INFO] Average n_bytes per duration: 11.79
+[INFO] Average n_packets per duration: 0.06
+[INFO] Average n_bytes per duration: 3.04
+[INFO] Average n_packets per duration: 0.06
+[INFO] Average n_bytes per duration: 3.04
+[INFO] Average n_packets per duration: 0.17
+[INFO] Average n_bytes per duration: 9.16
+[INFO] Average n_packets per duration: 0.17
+[INFO] Average n_bytes per duration: 9.16
+[INFO] Average n_packets per duration: 0.16
+[INFO] Average n_bytes per duration: 8.82
+[INFO] Average n_packets per duration: 0.16
+[INFO] Average n_bytes per duration: 8.82
+[INFO] Average n_packets per duration: 0.22
+[INFO] Average n_bytes per duration: 11.86
+[INFO] Average n_packets per duration: 0.22
+[INFO] Average n_bytes per duration: 11.86
+[INFO] Average n_packets per duration: 0.28
+[INFO] Average n_bytes per duration: 15.37
+[INFO] Average n_packets per duration: 0.28
+[INFO] Average n_bytes per duration: 15.37
+[INFO] Average n_packets per duration: 0.63
+[INFO] Average n_bytes per duration: 33.96
+[INFO] Average n_packets per duration: 0.63
+[INFO] Average n_bytes per duration: 33.96
+[INFO] Average n_packets per duration: 0.63
+[INFO] Average n_bytes per duration: 33.96
+[INFO] Average n_packets per duration: 0.76
+[INFO] Average n_bytes per duration: 40.74
+[INFO] Average n_packets per duration: 0.76
+[INFO] Average n_bytes per duration: 40.74
+[INFO] Average n_packets per duration: 0.67
+[INFO] Average n_bytes per duration: 35.88
+[INFO] Average n_packets per duration: 0.67
+[INFO] Average n_bytes per duration: 35.88
+[INFO] Average n_packets per duration: 0.61
+[INFO] Average n_bytes per duration: 32.61
+[INFO] Average n_packets per duration: 0.61
+[INFO] Average n_bytes per duration: 32.61
+[INFO] Average n_packets per duration: 5.30
+[INFO] Average n_bytes per duration: 286.00
+[ALERT] DDoS-related flow confirmed on switch s1! src_ip=10.0.0.1, dst_ip=10.0.0.5, n_packets/duration=769.69, n_bytes/duration=41563.46
+[ALERT] Attacker identified! src_ip=10.0.0.1 sent SYN to dst_ip=10.0.0.5
+[INFO] Command executed successfully: sudo ovs-ofctl -O OpenFlow13 del-flows s1 "ip,nw_src=10.0.0.1"
+[INFO] Command executed successfully: sudo ovs-ofctl -O OpenFlow13 add-flow s1 "priority=100,ip,nw_src=10.0.0.1,actions=drop"
+[INFO] Command executed successfully: sudo ovs-ofctl -O OpenFlow13 del-flows s2 "ip,nw_src=10.0.0.1"
+[INFO] Command executed successfully: sudo ovs-ofctl -O OpenFlow13 add-flow s2 "priority=100,ip,nw_src=10.0.0.1,actions=drop"
+[INFO] Command executed successfully: sudo ovs-ofctl -O OpenFlow13 del-flows s3 "ip,nw_src=10.0.0.1"
+[INFO] Command executed successfully: sudo ovs-ofctl -O OpenFlow13 add-flow s3 "priority=100,ip,nw_src=10.0.0.1,actions=drop"
+[INFO] Command executed successfully: sudo ovs-ofctl -O OpenFlow13 del-flows s4 "ip,nw_src=10.0.0.1"
+[INFO] Command executed successfully: sudo ovs-ofctl -O OpenFlow13 add-flow s4 "priority=100,ip,nw_src=10.0.0.1,actions=drop"
+[INFO] Command executed successfully: sudo ovs-ofctl -O OpenFlow13 del-flows s5 "ip,nw_src=10.0.0.1"
+[INFO] Command executed successfully: sudo ovs-ofctl -O OpenFlow13 add-flow s5 "priority=100,ip,nw_src=10.0.0.1,actions=drop"
+[INFO] Command executed successfully: sudo ovs-ofctl -O OpenFlow13 del-flows s6 "ip,nw_src=10.0.0.1"
+[INFO] Command executed successfully: sudo ovs-ofctl -O OpenFlow13 add-flow s6 "priority=100,ip,nw_src=10.0.0.1,actions=drop"
+[INFO] Generated DDoS Mitigation XML:
+<rpc xmlns="urn:ietf:params:xml:ns:netconf:base:1.0" message-id="101">
+  <edit-config>
+    <target>
+      <running/>
+    </target>
+    <config>
+      <ddos-mitigation xmlns="urn:example:ddos-mitigation">
+        <mitigation-policy>
+          <policy-id>policy-001</policy-id>
+          <policy-name>High Traffic Mitigation</policy-name>
+          <target>192.168.192.130/24</target>
+          <traffic-threshold>41563</traffic-threshold>
+          <mitigation-actions>
+            <rate-limit-value>384.0</rate-limit-value>
+            <duration>60</duration>
+          </mitigation-actions>
+          <detection-parameters>
+            <protocol-type>tcp</protocol-type>
+            <syn-flag-threshold>200</syn-flag-threshold>
+            <connection-rate-limit>20</connection-rate-limit>
+          </detection-parameters>
+        </mitigation-policy>
+      </ddos-mitigation>
+    </config>
+  </edit-config>
+</rpc>

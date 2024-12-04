@@ -1,0 +1,254 @@
+{
+  "s1": [
+    {
+      "cookie": "0x0",
+      "duration": "235.138s",
+      "table": "0",
+      "n_packets": "0",
+      "n_bytes": "0",
+      "priority": "100",
+      "match": "cookie=0x0, duration=235.138s, table=0, n_packets=0, n_bytes=0, priority=100,tcp,nw_dst=10.0.0.2,tp_dst=22",
+      "actions": "drop"
+    },
+    {
+      "cookie": "0x0",
+      "duration": "205.128s",
+      "table": "0",
+      "n_packets": "0",
+      "n_bytes": "0",
+      "priority": "100",
+      "match": "cookie=0x0, duration=205.128s, table=0, n_packets=0, n_bytes=0, priority=100,ip,nw_src=10.0.0.5",
+      "actions": "drop"
+    },
+    {
+      "cookie": "0x0",
+      "duration": "180.264s",
+      "table": "0",
+      "n_packets": "5811",
+      "n_bytes": "313794",
+      "priority": "100",
+      "match": "cookie=0x0, duration=180.264s, table=0, n_packets=5811, n_bytes=313794, priority=100,ip,nw_src=10.0.0.1",
+      "actions": "drop"
+    }
+  ],
+  "s2": [
+    {
+      "cookie": "0x0",
+      "duration": "235.119s",
+      "table": "0",
+      "n_packets": "0",
+      "n_bytes": "0",
+      "priority": "100",
+      "match": "cookie=0x0, duration=235.119s, table=0, n_packets=0, n_bytes=0, priority=100,tcp,nw_dst=10.0.0.2,tp_dst=22",
+      "actions": "drop"
+    },
+    {
+      "cookie": "0x0",
+      "duration": "205.110s",
+      "table": "0",
+      "n_packets": "0",
+      "n_bytes": "0",
+      "priority": "100",
+      "match": "cookie=0x0, duration=205.110s, table=0, n_packets=0, n_bytes=0, priority=100,ip,nw_src=10.0.0.5",
+      "actions": "drop"
+    },
+    {
+      "cookie": "0x0",
+      "duration": "180.245s",
+      "table": "0",
+      "n_packets": "0",
+      "n_bytes": "0",
+      "priority": "100",
+      "match": "cookie=0x0, duration=180.245s, table=0, n_packets=0, n_bytes=0, priority=100,ip,nw_src=10.0.0.1",
+      "actions": "drop"
+    }
+  ],
+  "s3": [
+    {
+      "cookie": "0x0",
+      "duration": "235.100s",
+      "table": "0",
+      "n_packets": "0",
+      "n_bytes": "0",
+      "priority": "100",
+      "match": "cookie=0x0, duration=235.100s, table=0, n_packets=0, n_bytes=0, priority=100,tcp,nw_dst=10.0.0.2,tp_dst=22",
+      "actions": "drop"
+    },
+    {
+      "cookie": "0x0",
+      "duration": "205.090s",
+      "table": "0",
+      "n_packets": "0",
+      "n_bytes": "0",
+      "priority": "100",
+      "match": "cookie=0x0, duration=205.090s, table=0, n_packets=0, n_bytes=0, priority=100,ip,nw_src=10.0.0.5",
+      "actions": "drop"
+    },
+    {
+      "cookie": "0x0",
+      "duration": "180.226s",
+      "table": "0",
+      "n_packets": "0",
+      "n_bytes": "0",
+      "priority": "100",
+      "match": "cookie=0x0, duration=180.226s, table=0, n_packets=0, n_bytes=0, priority=100,ip,nw_src=10.0.0.1",
+      "actions": "drop"
+    }
+  ],
+  "s4": [
+    {
+      "cookie": "0x0",
+      "duration": "235.082s",
+      "table": "0",
+      "n_packets": "2",
+      "n_bytes": "116",
+      "priority": "100",
+      "match": "cookie=0x0, duration=235.082s, table=0, n_packets=2, n_bytes=116, priority=100,tcp,nw_dst=10.0.0.2,tp_dst=22",
+      "actions": "drop"
+    },
+    {
+      "cookie": "0x0",
+      "duration": "205.072s",
+      "table": "0",
+      "n_packets": "18226",
+      "n_bytes": "984204",
+      "priority": "100",
+      "match": "cookie=0x0, duration=205.072s, table=0, n_packets=18226, n_bytes=984204, priority=100,ip,nw_src=10.0.0.5",
+      "actions": "drop"
+    },
+    {
+      "cookie": "0x0",
+      "duration": "180.208s",
+      "table": "0",
+      "n_packets": "0",
+      "n_bytes": "0",
+      "priority": "100",
+      "match": "cookie=0x0, duration=180.208s, table=0, n_packets=0, n_bytes=0, priority=100,ip,nw_src=10.0.0.1",
+      "actions": "drop"
+    },
+    {
+      "cookie": "0x0",
+      "duration": "66.438s",
+      "table": "0",
+      "n_packets": "25",
+      "n_bytes": "1694",
+      "priority": "10",
+      "match": "cookie=0x0, duration=66.438s, table=0, n_packets=25, n_bytes=1694, idle_timeout=30, hard_timeout=180, priority=10,dl_src=00:00:00:00:00:06,dl_dst=00:00:00:00:00:08",
+      "actions": "output:3"
+    },
+    {
+      "cookie": "0x0",
+      "duration": "37.308s",
+      "table": "0",
+      "n_packets": "14",
+      "n_bytes": "588",
+      "priority": "10",
+      "match": "cookie=0x0, duration=37.308s, table=0, n_packets=14, n_bytes=588, idle_timeout=30, hard_timeout=180, priority=10,dl_src=00:00:00:00:00:08,dl_dst=00:00:00:00:00:06",
+      "actions": "output:2"
+    }
+  ],
+  "s5": [
+    {
+      "cookie": "0x0",
+      "duration": "235.064s",
+      "table": "0",
+      "n_packets": "0",
+      "n_bytes": "0",
+      "priority": "100",
+      "match": "cookie=0x0, duration=235.064s, table=0, n_packets=0, n_bytes=0, priority=100,tcp,nw_dst=10.0.0.2,tp_dst=22",
+      "actions": "drop"
+    },
+    {
+      "cookie": "0x0",
+      "duration": "205.054s",
+      "table": "0",
+      "n_packets": "0",
+      "n_bytes": "0",
+      "priority": "100",
+      "match": "cookie=0x0, duration=205.054s, table=0, n_packets=0, n_bytes=0, priority=100,ip,nw_src=10.0.0.5",
+      "actions": "drop"
+    },
+    {
+      "cookie": "0x0",
+      "duration": "180.190s",
+      "table": "0",
+      "n_packets": "0",
+      "n_bytes": "0",
+      "priority": "100",
+      "match": "cookie=0x0, duration=180.190s, table=0, n_packets=0, n_bytes=0, priority=100,ip,nw_src=10.0.0.1",
+      "actions": "drop"
+    },
+    {
+      "cookie": "0x0",
+      "duration": "66.442s",
+      "table": "0",
+      "n_packets": "25",
+      "n_bytes": "1694",
+      "priority": "10",
+      "match": "cookie=0x0, duration=66.442s, table=0, n_packets=25, n_bytes=1694, idle_timeout=30, hard_timeout=180, priority=10,dl_src=00:00:00:00:00:06,dl_dst=00:00:00:00:00:08",
+      "actions": "output:2"
+    },
+    {
+      "cookie": "0x0",
+      "duration": "37.317s",
+      "table": "0",
+      "n_packets": "14",
+      "n_bytes": "588",
+      "priority": "10",
+      "match": "cookie=0x0, duration=37.317s, table=0, n_packets=14, n_bytes=588, idle_timeout=30, hard_timeout=180, priority=10,dl_src=00:00:00:00:00:08,dl_dst=00:00:00:00:00:06",
+      "actions": "output:3"
+    }
+  ],
+  "s6": [
+    {
+      "cookie": "0x0",
+      "duration": "235.046s",
+      "table": "0",
+      "n_packets": "0",
+      "n_bytes": "0",
+      "priority": "100",
+      "match": "cookie=0x0, duration=235.046s, table=0, n_packets=0, n_bytes=0, priority=100,tcp,nw_dst=10.0.0.2,tp_dst=22",
+      "actions": "drop"
+    },
+    {
+      "cookie": "0x0",
+      "duration": "205.036s",
+      "table": "0",
+      "n_packets": "0",
+      "n_bytes": "0",
+      "priority": "100",
+      "match": "cookie=0x0, duration=205.036s, table=0, n_packets=0, n_bytes=0, priority=100,ip,nw_src=10.0.0.5",
+      "actions": "drop"
+    },
+    {
+      "cookie": "0x0",
+      "duration": "180.170s",
+      "table": "0",
+      "n_packets": "0",
+      "n_bytes": "0",
+      "priority": "100",
+      "match": "cookie=0x0, duration=180.170s, table=0, n_packets=0, n_bytes=0, priority=100,ip,nw_src=10.0.0.1",
+      "actions": "drop"
+    },
+    {
+      "cookie": "0x0",
+      "duration": "66.448s",
+      "table": "0",
+      "n_packets": "24",
+      "n_bytes": "1624",
+      "priority": "10",
+      "match": "cookie=0x0, duration=66.448s, table=0, n_packets=24, n_bytes=1624, idle_timeout=30, hard_timeout=180, priority=10,dl_src=00:00:00:00:00:06,dl_dst=00:00:00:00:00:08",
+      "actions": "output:3"
+    },
+    {
+      "cookie": "0x0",
+      "duration": "37.319s",
+      "table": "0",
+      "n_packets": "14",
+      "n_bytes": "588",
+      "priority": "10",
+      "match": "cookie=0x0, duration=37.319s, table=0, n_packets=14, n_bytes=588, idle_timeout=30, hard_timeout=180, priority=10,dl_src=00:00:00:00:00:08,dl_dst=00:00:00:00:00:06",
+      "actions": "output:2"
+    }
+  ]
+}

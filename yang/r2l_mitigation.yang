@@ -1,0 +1,154 @@
+module brute-force-mitigation {
+  namespace "urn:example:brute-force-mitigation";
+  prefix bfmit;
+
+  import ietf-inet-types {
+    prefix inet;
+  }
+
+  organization "Example Organization";
+  contact "support@example.com";
+
+  description
+    "Module defining a Brute Force mitigation model.";
+
+  revision "2024-11-28" {
+    description "Initial revision.";
+  }
+
+  container brute-force-mitigation {
+    description
+      "Top-level container for Brute Force mitigation.";
+
+    list mitigation-policy {
+      key "policy-id";
+      description
+        "List of mitigation policies for managing Brute Force attacks.";
+
+      leaf policy-id {
+        type string;
+        description "Unique identifier for the mitigation policy.";
+      }
+
+      leaf policy-name {
+        type string;
+        description "Name of the mitigation policy.";
+      }
+
+      leaf target {
+        type inet:ip-prefix;
+        description "The IP prefix or network segment to which this policy applies.";
+      }
+
+      leaf authentication-failure-threshold {
+        type uint32;
+        units "failures";
+        description
+          "The number of authentication failures beyond which the policy is triggered.";
+      }
+
+      leaf observation-window {
+        type uint32;
+        units "seconds";
+        description
+          "The time window in seconds within which authentication failures are counted.";
+      }
+
+      container mitigation-actions {
+        description
+          "Actions to be taken when the Brute Force condition is detected.";
+
+        choice action-type {
+          description "Type of mitigation action to apply.";
+
+          case block-src-ip {
+            description "Block traffic from specific source IP addresses.";
+            list blocked-src-ip {
+              key "ip";
+              leaf ip {
+                type inet:ip-address;
+                description "Source IP address to block.";
+              }
+              leaf block-duration {
+                type uint32;
+                units "seconds";
+                description "Duration for which the IP address will be blocked.";
+              }
+            }
+          }
+
+          case rate-limit {
+            description "Rate-limit the traffic originating from suspected sources.";
+            leaf rate-limit-value {
+              type uint32;
+              units "packets-per-second";
+              description "Maximum allowed packet rate.";
+            }
+            leaf duration {
+              type uint32;
+              units "seconds";
+              description "Duration for the rate limit to be applied.";
+            }
+          }
+
+          case redirect-to-auth-check {
+            description "Redirect traffic to an additional authentication mechanism.";
+            leaf auth-check-service {
+              type inet:ip-address;
+              description "The IP address of the additional authentication service.";
+            }
+          }
+
+          case drop-traffic {
+            description "Drop traffic originating from specific sources.";
+            leaf drop-duration {
+              type uint32;
+              units "seconds";
+              description "Duration for which traffic will be dropped.";
+            }
+          }
+        }
+      }
+
+      container detection-parameters {
+        description
+          "Parameters for detecting and identifying Brute Force attacks.";
+
+        leaf protocol-type {
+          type enumeration {
+            enum "ssh" {
+              description "SSH protocol.";
+            }
+            enum "http" {
+              description "HTTP/HTTPS protocol.";
+            }
+            enum "ftp" {
+              description "FTP protocol.";
+            }
+          }
+          description "The protocol for which the detection applies.";
+        }
+
+        leaf failed-login-threshold {
+          type uint32;
+          units "failures";
+          description "Maximum allowed failed login attempts per observation window.";
+        }
+
+        leaf connection-rate-threshold {
+          type uint32;
+          units "connections-per-second";
+          description "Maximum allowed connection attempts per second.";
+        }
+
+        leaf geo-location-block {
+          type boolean;
+          default "false";
+          description
+            "Enable or disable blocking traffic based on geographic location.";
+        }
+      }
+    }
+  }
+}
+
