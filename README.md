@@ -53,12 +53,18 @@ sudo python3 flowtable.py
 ```bash
 sudo mn --custom largetopo.py --topo mylargetopo --mac --controller=remote,ip=127.0.0.1,port=6653 --switch=ovsk,protocols=OpenFlow13
 ```
-3. Generate normal traffic by using _traffic_instruction.txt_ or some instructions you want.
+3. Generate normal traffic by using _traffic_instruction.txt_ or some instructions you want at Mininet CLI.
+```bash
+mininet> h8 hping3 --udp -p 53 h6 -i 3 &
+```
 4. Start Packet Inspector.
 ```bash
 sudo ./inspect_flow.sh
 ```
-5. Test system by give network attack instruction among _attack_instruction.txt_.
-
+5. Test system by give network attack instruction among _attack_instruction.txt_ at Mininet CLI.
+```bash
+# BRUTE FORCE ATTACK
+mininet> h8 hping3 -S -p 22 --rand-source -c 50 -i u20000 10.0.0.2
+```
 
 
