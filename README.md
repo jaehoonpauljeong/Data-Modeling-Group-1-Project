@@ -30,7 +30,7 @@ This project presents a hybrid framework for automated security management in So
 - Ensures the alignment of security policies across the network.
 
 ### Technologies Used
-- Programming Languages: Python, XML, JSON.
+- Programming Languages: Python and XML.
 - Protocols:
   - OpenFlow: For dynamic flow management.
   - NETCONF/YANG: For device configuration and policy management.
